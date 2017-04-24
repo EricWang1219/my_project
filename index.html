@@ -67,8 +67,15 @@ img {
 <script type='text/javascript' src='https://code.jquery.com/jquery-1.9.1.min.js'></script>
 <script type="text/javascript">
 $(document).ready(function(){
+  var control = 0;
   $(".btn1").click(function(){
-  $("h1").animate({left:"50%"});
+  while(control==0){	  
+  if ($("h1").left()==0){
+  $("h1").animate({left:"40%"});
+  }else{
+  $("h1").animate({left:""});	  
+  }
+  }
   });
   $(".btn2").click(function(){
   $("h1").animate({left:""});
