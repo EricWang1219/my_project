@@ -90,6 +90,7 @@ div#run ul li  {
 	$(document).ready(function(){
 		var $run = $('div#run ul');
 		var timer;
+		var a=0;
 		$run.hover(function(){
 		clearTimeout(timer);
 	}, function(){
@@ -111,6 +112,6 @@ div#run ul li  {
 				No=0;
 				break;
 				 }
-			return No;
+			timer = setTimeout(show(a), 1000);
 		}
 	});
