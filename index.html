@@ -69,9 +69,10 @@ img {
 $(document).ready(function(){
   var control = 1;
   $(".btn1").click(function(){
-	  var left=$("h1").left();
-	  alert(left);
+  while(control!=0){	  
   $("h1").animate({left:"40%"});
+  $("h1").animate({left:""});
+  }
   });
   $(".btn2").click(function(){
   $("h1").animate({left:""});
