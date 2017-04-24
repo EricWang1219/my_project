@@ -91,34 +91,13 @@ div#run ul li  {
 </html>
 <script type='text/javascript' src='https://code.jquery.com/jquery-1.9.1.min.js'></script>
 <script type="text/javascript">
-	$(document).ready(function(){
-		var $run = $('div#run ul');
-		var timer;
-		var a=0;
-		$run.hover(function(){
-		clearTimeout(timer);
-	}, function(){
-		timer = setTimeout(show(a), 1000);
-	});
-		function show(a){
-			var No=a;
-			switch(No){
-				case "0":
-				$("#box").animate({top:"0px"});
-				No++;
-				break;
-					case "1":
-				$("#box").animate({top:"50px"});
-				No++;
-				break;
-					case "2":
-				$("#box").animate({top:"100px"});
-				No=0;
-				break;
-				 }
-			timer = setTimeout(show(a), 1000);
-		}
+$(document).ready(function(){
   $(".btn1").click(function(){
+  $("p").animate({top:"100px"});
+  });
+  $(".btn2").click(function(){
   $("p").animate({top:"0px"});
   });
-	});
+});
+</script>
+
