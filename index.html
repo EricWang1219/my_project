@@ -39,7 +39,6 @@ img {
 <div>
 <h1 style="width:(screen.width/2);position:absolute;border:1px solid #ccc;   left:0px;" >[課程資訊]每周一下午1:40~4:30 Web基本原理與技術</h1>
 	<button class="btn1">Run</button>
-	<button class="btn2">Stop</button>
 </div>
 
 
@@ -69,17 +68,14 @@ img {
 $(document).ready(function(){
   var control = 1;
   $(".btn1").click(function(){
-	 settimeout(show(),1000); 
+	show();
 
-  });
-  $(".btn2").click(function(){
-  $("h1").animate({left:""});
   });
 });
 	function show(){
   $("h1").animate({left:"40%"});
   $("h1").animate({left:""});
-		settimeout(show(),1000);
+		setTimeout(show(),1000);
 	}
 </script>
 
