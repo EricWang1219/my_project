@@ -33,17 +33,11 @@ img {
     border-radius: 10px;
     border-radius:50%;
   }
-	 .h1{
-	width:(screen.width/2);
-        position:absolute;
-        border:1px solid #ccc;
-        left:0px;
-	 }
   </style>
 	</head>	
 <body  background="http://web2.jaes.ntpc.edu.tw/wmv//GIMP/%E5%A5%BD%E5%BA%B7%E7%A6%AE%E7%89%A9/%E8%83%8C%E6%99%AF/%E8%83%8C%E6%99%AF-18.jpg">			
 <div>
-<h1 class="h1" >[課程資訊]每周一下午1:40~4:30 Web基本原理與技術</h1>
+<h1 style="width:(screen.width/2);position:absolute;border:1px solid #ccc;   left:0px;" >[課程資訊]每周一下午1:40~4:30 Web基本原理與技術</h1>
 	<button class="btn1">Run</button>
 	<button class="btn2">Stop</button>
 </div>
@@ -75,11 +69,7 @@ img {
 $(document).ready(function(){
   var control = 1;
   $(".btn1").click(function(){	  
-  if ($(".h1").left()==0){
-  $(".h1").animate({left:100px});
-  }else{
-  $("h1").animate({left:""});	  
-  }  
+  $("h1").animate({left:"85%"});
   });
   $(".btn2").click(function(){
   $("h1").animate({left:""});
