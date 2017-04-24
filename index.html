@@ -66,6 +66,7 @@ div#run ul li  {
 <li> [課程資訊]每周一下午1:40~4:30 物聯網應用</li>
 </ul>
 	</div>
+	<button class="btn1">Animate</button>
 	<div><img src="http://www.86ps.com/uploadfiles/jpg/2011-10/2011101221272174066.jpg" height="70%" weight="70%">
 	
 	<table class="a">
@@ -114,4 +115,7 @@ div#run ul li  {
 				 }
 			timer = setTimeout(show(a), 1000);
 		}
+  $(".btn1").click(function(){
+  $("run").animate({top:"100px"});
+  });
 	});
