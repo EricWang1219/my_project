@@ -69,14 +69,17 @@ img {
 $(document).ready(function(){
   var control = 1;
   $(".btn1").click(function(){
-  while(control!=0){	  
-  $("h1").animate({left:"40%"});
-  $("h1").animate({left:""});
-  }
+	 settime(show(),1000); 
+
   });
   $(".btn2").click(function(){
   $("h1").animate({left:""});
   });
 });
+	function show(){
+  $("h1").animate({left:"40%"});
+  $("h1").animate({left:""});
+		settime(show(),1000);
+	}
 </script>
 
