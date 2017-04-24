@@ -61,9 +61,9 @@ div#run ul li  {
 <body  background="http://web2.jaes.ntpc.edu.tw/wmv//GIMP/%E5%A5%BD%E5%BA%B7%E7%A6%AE%E7%89%A9/%E8%83%8C%E6%99%AF/%E8%83%8C%E6%99%AF-18.jpg">			
 <div id="run">
 <ul>
-<li> 每周一下午1:40~4:30 Web基本原理與技術</li>
-<li> 每周二早上9:10~12:00 類神經網路概論</li>
-<li> 每周一下午1:40~4:30 物聯網應用</li>
+<li> [課程資訊]每周一下午1:40~4:30 Web基本原理與技術</li>
+<li> [課程資訊]每周二早上9:10~12:00 類神經網路概論</li>
+<li> [課程資訊]每周一下午1:40~4:30 物聯網應用</li>
 </ul>
 	</div>
 	<div><img src="http://www.86ps.com/uploadfiles/jpg/2011-10/2011101221272174066.jpg" height="70%" weight="70%">
@@ -85,3 +85,32 @@ div#run ul li  {
 
 
 </html>
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script>
+	$(document).ready(function(){
+		var $run = $('div#run ul');
+		var timer;
+		$run.hover(function(){
+		clearTimeout(timer);
+	}, function(){
+		timer = setTimeout(show(a), 1000);
+	});
+		function show(a){
+			var No=a;
+			switch(No){
+				case "0":
+				$("#box").animate({top:"0px"});
+				No++;
+				break;
+					case "1":
+				$("#box").animate({top:"50px"});
+				No++;
+				break;
+					case "2":
+				$("#box").animate({top:"100px"});
+				No=0;
+				break;
+				 }
+			return No;
+		}
+	});
