@@ -68,8 +68,9 @@ img {
 <script type="text/javascript">
 $(document).ready(function(){
   var control = 1;
-  $(".btn1").click(function(){	  
-  $("h1").animate({left:"85%"});
+  $(".btn1").click(function(){
+	  alert($("h1").left());
+  $("h1").animate({left:"40%"});
   });
   $(".btn2").click(function(){
   $("h1").animate({left:""});
