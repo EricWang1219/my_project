@@ -45,7 +45,7 @@ div#run ul, div#run li {
 	padding: 0;
 	list-style: none;
 }
-div#abgne_marquee ul {
+div#run ul {
 	position: absolute;
 }
 div#run ul li  {
@@ -90,9 +90,9 @@ div#run ul li  {
 
 </html>
 <script type='text/javascript' src='https://code.jquery.com/jquery-1.9.1.min.js'></script>
-<script>
+<script type="text/javascript">
 	$(document).ready(function(){
-		var $run = $('div#run li');
+		var $run = $('div#run ul');
 		var timer;
 		var a=0;
 		$run.hover(function(){
@@ -119,6 +119,6 @@ div#run ul li  {
 			timer = setTimeout(show(a), 1000);
 		}
   $(".btn1").click(function(){
-  $("p").animate({top:"100px"});
+  $("p").animate({top:"0px"});
   });
 	});
