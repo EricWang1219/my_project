@@ -69,7 +69,7 @@ img {
 $(document).ready(function(){
   var control = 1;
   $(".btn1").click(function(){
-	 settime(show(),1000); 
+	 settimeout(show(),1000); 
 
   });
   $(".btn2").click(function(){
@@ -79,7 +79,7 @@ $(document).ready(function(){
 	function show(){
   $("h1").animate({left:"40%"});
   $("h1").animate({left:""});
-		settime(show(),1000);
+		settimeout(show(),1000);
 	}
 </script>
 
