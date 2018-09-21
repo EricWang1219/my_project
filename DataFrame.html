@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DataFrame Data</title>
+</head>
+<script type="text/javascript" src="{{ url_for('static', filename='event.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+<body>
+<h1>Welcome</h1>
+{{ data }} 
+ <input type="button" value="ajax" onclick="OddsEvent.GetDataEvent(3387732, 'CO', 238, 19, '', 'https://classic.sportsbookreview.com/betting-odds/mlb-baseball/st-louis-cardinals-vs-atlanta-braves-3387732/');"/>
+</body>
+</html>
