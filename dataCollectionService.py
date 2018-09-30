@@ -78,28 +78,26 @@ def getIdList():
         for teamValue in div.find_all("span", class_="team-name"):
             teamList.append(teamValue.text)
         resultList.append(dict(id=getId(div['id']), homeTeam=teamList[0], awayTeam=teamList[1]))
-
-    for obj in resultList:
-        print(obj["id"])
+    #將對戰基本資訊存入DB
     return resultList
 
 def getContent():
-    idList = getIdList()
-    for obj in idList: 
-        response = initRequestAndGetResponse(obj["id"])
-        soup = BeautifulSoup(response.text, 'lxml')
-    
     datas = []
     awayTeamData = [] #客隊資訊
     homeTeamData = [] #主隊資訊
     pointsSpreadsData = [] #讓分
     moneyLinesData = [] #PK
-    totalData = [] #總分
+    totalData = [] #總分    
 
-    #取得所有Data
-    for data in soup.find_all("div", class_="info-box"):
-        datas.append(data)
+    idList = getIdList()
+    for obj in idList: 
+        response = initRequestAndGetResponse(obj["id"])
+        soup = BeautifulSoup(response.text, 'lxml')
+        #取得所有Data
+        for data in soup.find_all("div", class_="info-box"):
+            datas.append(data)
+    pointsSpreadsData.append(getPointsSpreadsDatas(datas[0])) 
 
-    return getPointsSpreadsDatas(datas[0])
+    return pointsSpreadsData
     
   
