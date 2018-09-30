@@ -12,6 +12,7 @@ import time
 import numpy as np
 import pandas as pd
 import requests as rq
+import organizeDataService as ocs
 
 #取得div的Id
 def getId(s):
@@ -26,63 +27,79 @@ def replace_all(text, dic):
         text = text.replace(i, j)
     return text    
 
+#整理讓分data
+def getPointsSpreadsDatas(psd):
+    awayTeam = []
+    homeTeam = []
+    for d in psd.find_all("td"):
+        awayTeam.append(d.text)
+    return awayTeam
 
-def getContent():
+#設定request 並取得response
+def initRequestAndGetResponse(id):
+    time = str(date.today()).replace('-','')
     url = 'https://classic.sportsbookreview.com/ajax/?a=[SBR.Odds.Modules]OddsEvent_GetConsensus'
     payload = {
         'UserId': '0',
-        'Sport': 'baseball',
-        'League': 'MLB',
-        'EventId': '3387670',
+        'Sport': 'basketball',
+        'League': 'NBA',
+        'EventId': id,
         'View': 'CO',
         'SportsbookId': '0',
         'DefaultBookId': '0',
         'ConsensusBookId': '19',
         'PeriodTypeId': '',
-        'StartDate': '2018-09-20',
-        'MatchupLink': 'https://classic.sportsbookreview.com/betting-odds/mlb-baseball/ny-mets-vs-washington-nationals-3387670/',
+        'StartDate': '2017-11-16',
+        'MatchupLink': 'https://classic.sportsbookreview.com/betting-odds/nba-basketball/golden-state-warriors-vs-boston-celtics-' + id + '/',
         'Key': 'ec7fbd5935fc25d86592d3e48eea2d68',
         'theme': 'Blue',
     }
     headers = {
         'Host': 'classic.sportsbookreview.com',
         'Origin': 'https://classic.sportsbookreview.com',
-        'Referer': 'https://classic.sportsbookreview.com/betting-odds/mlb-baseball/totals/?date=20180920'
+        'Referer': 'https://classic.sportsbookreview.com/betting-odds/nba-basketball/?date=20171116'
     }
     r = rq.post(url, data=payload, headers=headers)
     r.headers['Access-Control-Allow-Origin'] = '*'
     r.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
     r.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
-    soup = BeautifulSoup(r.text, 'lxml')
-    
-    awayTeamData = []
-    homeTeamData = []
-    for teamName in soup.find_all("td", class_="header-grid"):
-        awayTeamData.append(teamName.text)
-    return awayTeamData
 
-def getData():
-    url = 'http://classic.sportsbookreview.com/betting-odds/mlb-baseball/totals/?date=' + str(date.today()).replace('-','')
+    return r
+
+def getIdList():
+    url = 'https://classic.sportsbookreview.com/betting-odds/nba-basketball/?date=20171116'
+    #url = 'http://classic.sportsbookreview.com/betting-odds/nba-baseball/totals/?date=' + str(date.today()).replace('-','')
     response = rq.get(url) # 用 requests 的 get 方法把網頁抓下來
     soup = BeautifulSoup(response.text, "lxml") # 指定 lxml 作為解析器
-
     
-    idList = []
-    #for div in soup.find_all("div", class_= "eventBox"):
-    #    idList.append(div['id'])
+    resultList = []
+    for div in soup.find_all("div", class_= "event-holder"):
+        teamList = []
+        for teamValue in div.find_all("span", class_="team-name"):
+            teamList.append(teamValue.text)
+        resultList.append(dict(id=getId(div['id']), homeTeam=teamList[0], awayTeam=teamList[1]))
 
-    #teamList = [] #['隊伍-投手','隊伍-投手','隊伍-投手',......]
-    #replaceStr = {"\xa0": "", "\n": "", " ": ""}
-    #for id in idList: getId(str(div))
-        #target = soup.find_all("div", id=id)
-        #for t in target:
-            #teams = t.find_all("span", class_="team-name")
-            #matchUp = ""
-            #for team in teams:
-                #teamList.append(replace_all(team.text, replaceStr))
+    for obj in resultList:
+        print(obj["id"])
+    return resultList
 
-    #awayTeamData = []
-    #homeTeamData = []
-    return idList
+def getContent():
+    idList = getIdList()
+    for obj in idList: 
+        response = initRequestAndGetResponse(obj["id"])
+        soup = BeautifulSoup(response.text, 'lxml')
+    
+    datas = []
+    awayTeamData = [] #客隊資訊
+    homeTeamData = [] #主隊資訊
+    pointsSpreadsData = [] #讓分
+    moneyLinesData = [] #PK
+    totalData = [] #總分
+
+    #取得所有Data
+    for data in soup.find_all("div", class_="info-box"):
+        datas.append(data)
+
+    return getPointsSpreadsDatas(datas[0])
     
   
