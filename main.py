@@ -10,17 +10,23 @@ from functools import wraps
 import numpy as np
 import pandas as pd
 import requests as rq
+import sportAnalyzeFacade
 import dataCollectionService as dcs
 
 app = Flask(__name__)
 app.config.from_object(DevConfig)
 CORS(app, resources=r'/*')
 
+@app.route('/')
+def init():
+    result = dcs.getIdList()
+    return render_template('DataFrame.html', data=result)
+
 @app.route('/getData')
 def getData():
-    result = dcs.getContent()
+    sportAnalyzeFacade.collectData()
 
-    return render_template('DataFrame.html', data=result)
+    return 'SUCCESS'
 
 if __name__ == '__main__':
     app.run()
